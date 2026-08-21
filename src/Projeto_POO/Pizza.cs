@@ -24,37 +24,37 @@ namespace XulambsFoods
         }
         void Init(int q)
         {
-            precoBase = 29;
-            quantIngredientes = 0;
-            AdicionarIngredientes(q);
-            valorPorAdicional = 5;
             descricao = "Pizza padrão";
+            precoBase = 29;
+            quantIngredientes = AdicionarIngredientes(q);
+            valorPorAdicional = 5;
         }
         double ValorAdicionais()
         {
             return valorPorAdicional * quantIngredientes;
         }
-        void ModificarDescricao(string desc)
+        string ModificarDescricao()
         {
-            descricao = desc;
+            return $"Pizza com {quantIngredientes} adicionais";
         }
         bool PodeAdicionar(int q)
         {
-            if (quantIngredientes + q < 8 && q > 0) return true;
+            if (quantIngredientes + q <= 8 && q > 0) return true;
             return false;
         }
         public double CalcularValorFinal()
         {
             return precoBase + ValorAdicionais();
         }
-        public void AdicionarIngredientes(int q)
+        public int AdicionarIngredientes(int q)
         {
             if (PodeAdicionar(q)) quantIngredientes += q;
-            else throw new Exception("Quantidade de ingredientes inválida");
+            ModificarDescricao();
+            return quantIngredientes;
         }
         public string GerarCupom()
         {
-            return descricao + "\n" + "Valor final: " + CalcularValorFinal();
+            return descricao +"\nValor final: " + CalcularValorFinal();
         }
 
     }
