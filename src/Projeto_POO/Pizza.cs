@@ -1,69 +1,61 @@
 ﻿using System;
 
 
-namespace XulambsFoods {    
-    public class Pizza {
-
-        /// <summary>
+namespace XulambsFoods
+{
+    public class Pizza
+    {
         /// Lembre-se:
         // ENTENDER O PROBLEMA!!!
         //Regra 0 -- não entre em pânico
         //Regra 1 -- não viaje
-        /// </summary>
-        /// 
-        #region atributos
-        int _maxIngredientes;
-        double _precoBase;
-        int _quantIngredientes;
-        double _valorPorAdicional;
-        string _descricao;
-        #endregion
-
-        #region construtores
-        public Pizza() {
-            _descricao = "Pizza";
-            _maxIngredientes = 8;
-            _precoBase = 29d;
-            _quantIngredientes = 0;
-            _valorPorAdicional = 5d;
+        int maxIngredientes;
+        double precoBase;
+        int quantIngredientes;
+        double valorPorAdicional;
+        string descricao;
+        public Pizza()
+        {
+            Init(0);
         }
-
-        public Pizza(int adicionais) {
-        
+        public Pizza(int q)
+        {
+            Init(q);
         }
-        #endregion
-
-        #region métodos privados
-        private double ValorAdicionais() {
-                
+        void Init(int q)
+        {
+            precoBase = 29;
+            quantIngredientes = 0;
+            AdicionarIngredientes(q);
+            valorPorAdicional = 5;
+            descricao = "Pizza padrão";
         }
-
-        private void ModificarDescricao() {
-            _descricao = $"Pizza com {_quantIngredientes} adicionais";
+        double ValorAdicionais()
+        {
+            return valorPorAdicional * quantIngredientes;
         }
-
-        private bool PodeAdicionar(int quantos) {
-                
+        void ModificarDescricao(string desc)
+        {
+            descricao = desc;
         }
-        #endregion
-
-        #region métodos públicos
-        public double CalcularValorFinal() {
-            return _precoBase + ValorAdicionais();
+        bool PodeAdicionar(int q)
+        {
+            if (quantIngredientes + q < 8 && q > 0) return true;
+            return false;
         }
-
-        public int AdicionarIngredientes(int quantos) {
-            if (PodeAdicionar(quantos)) {
-                _quantIngredientes = _quantIngredientes + quantos;
-                ModificarDescricao();
-            }
-            return _quantIngredientes;
+        public double CalcularValorFinal()
+        {
+            return precoBase + ValorAdicionais();
         }
-
-        public string GerarCupom() {
-                
+        public void AdicionarIngredientes(int q)
+        {
+            if (PodeAdicionar(q)) quantIngredientes += q;
+            else throw new Exception("Quantidade de ingredientes inválida");
         }
-        #endregion
+        public string GerarCupom()
+        {
+            return descricao + "\n" + "Valor final: " + CalcularValorFinal();
+        }
 
     }
 }
