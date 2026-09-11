@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text;
+
 namespace XulambsFoods {
     public class XulambsApp
     {
