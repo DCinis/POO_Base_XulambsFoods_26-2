@@ -31,8 +31,8 @@ namespace XulambsFoods {
             Cabecalho();
             StringBuilder menu = new StringBuilder();
             menu.AppendLine("1 - Abrir um pedido");
-            menu.AppendLine("2 - Relatório de um pedido");
-            menu.AppendLine("3 - Incluir pizza em pedido");
+            menu.AppendLine("2 - Alterar pedido");
+            menu.AppendLine("3 - Relatório de pedido");
             menu.AppendLine("4 - Fechar pedido");
             menu.AppendLine("0 - Finalizar");
             menu.Append("Sua opção: ");
@@ -68,11 +68,13 @@ namespace XulambsFoods {
         static Pizza ComprarPizza() {
             Cabecalho();
 
+            Pizza novaPizza = new Pizza();
+
             Console.WriteLine("Comprando uma pizza:");
             int quantos = EscolherIngredientes();
 
-            Pizza novaPizza = new Pizza(quantos);
-
+            novaPizza.AdicionarIngredientes(quantos);
+            
             ImprimirDadosPizza(novaPizza);
 
             return novaPizza;
@@ -145,8 +147,8 @@ namespace XulambsFoods {
                 Action ac =
                 opcao switch {
                     1 => () => CriarPedido(),
-                    2 => () => RelatorioPedido(),
-                    3 => () => AlterarPedido(),
+                    2 => () => AlterarPedido(),
+                    3 => () => RelatorioPedido(),
                     4 => () => FecharPedido(),
                     _ => () => Pausa()
                 };
