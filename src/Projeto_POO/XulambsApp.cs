@@ -64,6 +64,7 @@ namespace XulambsFoods {
             Console.Write("Quantos ingredientes você deseja (0-8)? ");
             return int.Parse(Console.ReadLine());
         }
+
         static Pizza ComprarPizza() {
             Cabecalho();
 
