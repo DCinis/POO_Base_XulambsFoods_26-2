@@ -26,18 +26,20 @@ namespace XulambsFoods {
 
         private int _quantIngredientes;
         private string _descricao;
+        private EBorda _borda;
         #endregion
 
         #region construtores
 
-        private void Init(int adicionais) {
+        private void Init(int adicionais, EBorda borda) {
             _descricao = "Pizza";
             AdicionarIngredientes(adicionais);
+            AdicionarBorda(borda);
             s_pizzasVendidas++;
         }
 
         public Pizza() {
-            Init(0);
+            Init(0, EBorda.Tradicional);
         }
 
         /// <summary>
@@ -45,7 +47,15 @@ namespace XulambsFoods {
         /// </summary>
         /// <param name="adicionais">Quantidade de ingredientes da pizza. Deve ser >= 0 e <=8 </param>
         public Pizza(int adicionais) {
-            Init(adicionais);
+            Init(adicionais, EBorda.Tradicional);
+        }
+
+        public Pizza(EBorda borda) {
+            Init(0, borda);
+        }
+
+        public Pizza(int adicionais, EBorda borda) {
+            Init(adicionais, borda);
         }
         #endregion
 
@@ -72,7 +82,11 @@ namespace XulambsFoods {
 
         #region métodos públicos
         public double CalcularValorFinal() {
-            return PrecoBase + ValorAdicionais();
+            return PrecoBase + ValorAdicionais() + _borda.Valor();
+        }
+
+        public void AdicionarBorda(EBorda borda) {
+            _borda = borda;
         }
 
         /// <summary>
@@ -97,7 +111,7 @@ namespace XulambsFoods {
         public string GerarCupom() {
             StringBuilder cupom = new StringBuilder("Xulambs Pizza!!!\n");
             cupom.AppendLine("================");
-            cupom.AppendLine($"{_descricao}");
+            cupom.AppendLine($"{_descricao} com borda {_borda}");
             cupom.AppendLine($"\tPizza: {PrecoBase:C2}");
             cupom.AppendLine($"\t{_quantIngredientes} adicionais : {ValorAdicionais():C2}");
             cupom.AppendLine($"TOTAL: {CalcularValorFinal():C2}");

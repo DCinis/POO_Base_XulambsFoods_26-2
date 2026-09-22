@@ -5,7 +5,7 @@ using System.Text;
 namespace XulambsFoods {
     public class XulambsApp {
         static LinkedList<Pedido> pedidos;
-        static string versao = "0.2";
+        static string versao = "0.3";
 
         #region utilidades
         static void Pausa() {
@@ -67,14 +67,15 @@ namespace XulambsFoods {
 
         static Pizza ComprarPizza() {
             Cabecalho();
-
+            
             Pizza novaPizza = new Pizza();
 
             Console.WriteLine("Comprando uma pizza:");
             int quantos = EscolherIngredientes();
-
+         
             novaPizza.AdicionarIngredientes(quantos);
-            
+         
+
             ImprimirDadosPizza(novaPizza);
 
             return novaPizza;
