@@ -34,5 +34,28 @@ namespace XulambsFoods {
                 _ => 0
             };
         }
+        public static double Valor(this EBebida bebida)
+        {
+            return bebida switch
+            {
+                EBebida.ÁguaDaCasa => 4,
+                EBebida.ÁguaComGás => 6,
+                EBebida.CháComGás => 9,
+                EBebida.Sucos => 15,
+                EBebida.Cerveja => 18,
+                EBebida.TaçaDeVinho => 7,
+                _ => 0
+            };
+        }
+        public static double Valor(this ESobremesa sobremesa)
+        {
+            return sobremesa switch
+            {
+                ESobremesa.BrigadeiroNaColher => 8,
+                ESobremesa.PudimDeLeiteCondensado => 10,
+                ESobremesa.DoceDeLeiteNoPires => 9,
+                        _ => 0
+            };
+        }
     }
 }
