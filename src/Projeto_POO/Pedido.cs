@@ -21,12 +21,12 @@ namespace XulambsFoods {
                 throw new PedidoFechadoException();
         } //virtual: autorização para ser sobrescrito.
 
-        public int Adicionar(Pizza pizza) {
-            if (pizza == null)
-                throw new ArgumentNullException("Pizza não foi criada");
+        public int Adicionar(Alimento alimento) {
+            if (alimento == null)
+                throw new ArgumentNullException("Alimento não foi criado");
             
             PodeAdicionar();
-            _alimentos.AddLast(pizza);
+            _alimentos.AddLast(alimento);
             return _alimentos.Count;
         }
 
@@ -52,7 +52,7 @@ namespace XulambsFoods {
                 estado = "aberto";
             relat.AppendLine($"Pedido {estado}.");
             int i = 0;
-            foreach (Pizza alimento in _alimentos)
+            foreach (Alimento alimento in _alimentos)
             {
                 relat.AppendLine($"{++i:D2} {alimento.ToString()}");
             }
